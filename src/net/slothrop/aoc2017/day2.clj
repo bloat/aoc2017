@@ -30,13 +30,19 @@
   (reduce + (map diff sheet)))
 
 
+;; Just use apply you dolt!
+(defn alt-checksum [sheet]
+  (->> sheet
+       (map (fn [row] (- (apply max row) (apply min row))))
+       (reduce +)))
+
 (comment
 
   (checksum [[5 1 9 5]
              [7 5 3]
              [2 4 6 8]])
 
-  (checksum sheet))
+  (alt-checksum sheet))
 
 ;;; Part 2
 
@@ -48,13 +54,25 @@
 (defn checksum2 [sheet]
   (reduce + (map evdiv sheet)))
 
+;; List comprehension with built in filters.
+(defn alt-checksum2 [sheet]
+  (->> sheet
+       (map (fn [row] (for [x row y row
+                            :when (not (= x y))
+                            :when (zero? (rem x y))]
+                        (/ x y))))
+       (map first)
+       (reduce +)))
+
 (comment
+
+  (ed2 [5 9 2 8])
+
 
   (checksum2 [[5 9 2 8]
               [9 4 7 3]
-              [3 8 6 5]
-              ])
+              [3 8 6 5]])
 
-
+  (alt-checksum2 sheet)
 
   )
