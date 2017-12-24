@@ -1,4 +1,4 @@
-(ns net.slothrop.aoc2017.day18
+(ns net.slothrop.aoc2017.day21
   (:require [clojure.java.io :as io]
             [clojure.string :as s]))
 
